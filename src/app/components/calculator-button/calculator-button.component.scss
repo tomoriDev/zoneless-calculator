@@ -18,3 +18,7 @@ button {
 .is-doubled-size {
   @apply w-full h-16 outline-none focus:outline-none bg-indigo-700 bg-opacity-30 hover:bg-opacity-40 text-white text-xl font-light;
 }
+
+.is-pressed {
+  @apply bg-indigo-950 bg-opacity-20;
+}
