@@ -46,6 +46,6 @@ export class CalculatorComponent {
   }
 
   handleClick(key: string) {
-    console.log(key);
+    this.calculatorService.constructNumber(key);
   }
 }
