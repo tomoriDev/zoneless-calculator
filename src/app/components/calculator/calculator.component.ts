@@ -34,6 +34,8 @@ export class CalculatorComponent {
       Escape: 'C',
       Clear: 'C',
       '*': 'x',
+      'x': 'x',
+      '÷': '/',
       Enter: '=',
     };
     const { key } = event;

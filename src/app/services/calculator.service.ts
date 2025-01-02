@@ -16,6 +16,7 @@ export class CalculatorService {
     }
 
     if (value === '=') {
+      this.calculateResult();
       return;
     }
 
@@ -35,11 +36,17 @@ export class CalculatorService {
         return;
       }
 
+      if (this.resultText().length === 2 && this.resultText().includes('-')) {
+        this.resultText.set('0');
+        return;
+      }
+
       this.resultText.update(prev => prev.slice(0, -1));
       return;
     }
 
     if (ALLOWED_OPERATORS.includes(value)) {
+      this.calculateResult();
       this.lastOperator.set(value);
       this.subResultText.set(this.resultText());
       this.resultText.set('0');
@@ -101,6 +108,32 @@ export class CalculatorService {
       ALLOWED_OPERATORS.includes(value) ||
       SPECIAL_OPERATORS.includes(value)
     );
+  }
+
+  public calculateResult() {
+    const number1 = parseFloat(this.subResultText());
+    const number2 = parseFloat(this.resultText());
+
+    let result = 0;
+
+    switch (this.lastOperator()) {
+      case '+':
+        result = number1 + number2;
+        break;
+      case '-':
+        result = number1 - number2;
+        break;
+      case 'x':
+        result = number1 * number2;
+        break;
+      case '/':
+        result = number1 / number2;
+        break;
+    }
+
+    let formattedResult = parseFloat(result.toFixed(4)).toString();
+    this.resultText.set(formattedResult);
+    this.subResultText.set('0');
   }
 }
 
